@@ -17,7 +17,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 //        System.out.printf("\n\tBean with name %s before init\n\n",beanName);
         Field[] declaredFields = bean.getClass().getDeclaredFields();
-        Arrays.stream(declaredFields).filter(t->t.getAnnotation(RandomValue.class)!=null)
+        Arrays.stream(declaredFields).filter(t->t.isAnnotationPresent(RandomValue.class))
                 .forEach(t->{t.setAccessible(true);
                     ReflectionUtils.setField(t,bean, new Random().nextInt()%100);});
 
