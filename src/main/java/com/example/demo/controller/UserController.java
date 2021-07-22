@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -22,5 +23,10 @@ public class UserController {
     @GetMapping("")
     public ResponseEntity<Collection<User>> findAllUsers(){
         return ResponseEntity.ok(userService.findAllUsers());
+    }
+
+    @PostMapping("")
+    public ResponseEntity<User> saveUser(@Valid @RequestBody User user){
+        return ResponseEntity.ok(userService.saveUser(user));
     }
 }
