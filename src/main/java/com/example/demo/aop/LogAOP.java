@@ -15,6 +15,6 @@ public class LogAOP {
 
     @Before("logPointcut()")
     public void doLogBefore(){
-        log.info("Succs");
+//        log.info("Succs");
     }
 }
