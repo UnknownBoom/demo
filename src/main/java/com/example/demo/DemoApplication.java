@@ -9,9 +9,6 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext run = SpringApplication.run(DemoApplication.class, args);
-		run.close();
-
-
 	}
 
 }
