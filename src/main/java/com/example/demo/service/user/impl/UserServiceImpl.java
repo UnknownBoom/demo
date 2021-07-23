@@ -1,22 +1,27 @@
 package com.example.demo.service.user.impl;
 
+import com.example.demo.annotations.DeprecatedClass;
+import com.example.demo.annotations.PostProxy;
 import com.example.demo.annotations.RandomValue;
 import com.example.demo.domain.model.User;
+import com.example.demo.excep.MyExep;
 import com.example.demo.service.user.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedResource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.Collection;
 
-@Service
+@Service("UserServiceImpl")
+@Lazy
 @ManagedResource
+@DeprecatedClass(newClass = UserServiceNewImpl.class)
 public class UserServiceImpl implements UserService {
     @RandomValue
-    private int rand;
+    protected int rand =3;
 
     @ManagedAttribute
     public int getRand() {
@@ -25,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Long id) {
+//        throw new MyExep("tes");
         System.out.println(rand);
         return null;
     }
@@ -40,13 +46,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @PreDestroy
-    public void test(){
+    public void preDestroyMethod(){
         System.out.println(rand);
         System.out.println("-----Exit------------------");
     }
     @PostConstruct
-    public void init(){
-        System.out.println(rand);
-        System.out.println("-----Start--------------");
+    public void postConstructMethod(){
+
+        System.out.println("-----Start (1) ---- " + rand + " ----");
+    }
+    @PostProxy
+    public void postProxyMethod(){
+        System.out.println("-----PostProxy------------");
     }
 }

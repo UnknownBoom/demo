@@ -3,12 +3,13 @@ package com.example.demo.service.user.impl;
 import com.example.demo.domain.model.User;
 import com.example.demo.service.user.UserValidationService;
 import com.sun.istack.NotNull;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
+@Service
 public class UserValidationServiceImpl implements UserValidationService {
     private int minUsernameLength;
     private int minPasswordLength;

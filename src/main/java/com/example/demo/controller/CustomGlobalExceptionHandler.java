@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.excep.MyExep;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -44,5 +45,12 @@ public class CustomGlobalExceptionHandler {
                     fieldError.getField(), fieldError.getDefaultMessage());
         }
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(MyExep.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ResponseEntity onMyExcepHandler(MyExep e) {
+        System.out.println("Caught exception " + e.getMessage());
+        return ResponseEntity.badRequest().body(null);
     }
 }
