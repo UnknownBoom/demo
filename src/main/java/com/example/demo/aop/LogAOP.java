@@ -24,7 +24,9 @@ public class LogAOP {
     @Around("logPointcut()")
     public Object doAroundLog(ProceedingJoinPoint pjp) throws Throwable {
         try {
+            log.info("Method {} preprocessed",pjp.getSignature());
             Object proceed = pjp.proceed();
+            log.info("Method {} returned {}",pjp.getSignature(),proceed);
             return proceed;
         } catch (MyExep throwable) {
             throwable.printStackTrace();

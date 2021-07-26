@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequestMapping("api/v1/user")
 public class UserController {
     @Autowired
-    @Qualifier("UserServiceImpl")
     private UserService userService;
 
     @GetMapping("{id}")

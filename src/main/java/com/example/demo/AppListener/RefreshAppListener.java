@@ -30,8 +30,11 @@ public class RefreshAppListener implements ApplicationListener<ContextRefreshedE
                 Class<?> aClass = Class.forName(beanDefinition.getBeanClassName());
                 for (Method declaredMethod : aClass.getDeclaredMethods()) {
                     if(declaredMethod.isAnnotationPresent(PostProxy.class)){
+                        System.out.println(aClass);
                         Object bean = context.getBean(beanName, aClass);
-                        bean.getClass().getMethod(declaredMethod.getName(),declaredMethod.getParameterTypes()).invoke(bean);
+
+                        Method method = bean.getClass().getMethod(declaredMethod.getName(), declaredMethod.getParameterTypes());
+                        method.invoke(bean);
                     }
                 }
             } catch (Exception e) {

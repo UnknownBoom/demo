@@ -15,7 +15,7 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
         for (String beanDefinitionName : beanDefinitionNames) {
             BeanDefinition beanDefinition = configurableListableBeanFactory.getBeanDefinition(beanDefinitionName);
             String beanClassName = beanDefinition.getBeanClassName();
-            if(beanClassName==null)continue;
+            if(beanClassName==null) continue;
             try {
                 Class<?> aClass = Class.forName(beanClassName);
                 DeprecatedClass annotation = aClass.getAnnotation(DeprecatedClass.class);
@@ -26,5 +26,6 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
                 e.printStackTrace();
             }
         }
+
     }
 }

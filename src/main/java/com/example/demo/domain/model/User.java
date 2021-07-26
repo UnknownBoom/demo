@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,5 +33,6 @@ public class User {
                     name = "role_id",
                     referencedColumnName = "id"
             ))
-    private Collection<Role> roles;
+    private Collection<Role> roles = new HashSet<>() {
+    };
 }
